@@ -1,0 +1,817 @@
+{
+  "last_node_id": 19,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": {
+        "0": 678,
+        "1": 684
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae-Flux-vae.safetensors"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": 2023,
+        "1": 341
+      },
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 5
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 4
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 6
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 7
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      }
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 2074,
+        "1": 646
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 9
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 15,
+      "type": "ImageUpscaleWithModel",
+      "pos": {
+        "0": 2041,
+        "1": 831
+      },
+      "size": {
+        "0": 258.34930419921875,
+        "1": 47.94294357299805
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 14
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            15
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel"
+      }
+    },
+    {
+      "id": 17,
+      "type": "ImageScaleBy",
+      "pos": {
+        "0": 2463,
+        "1": 334
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy"
+      },
+      "widgets_values": [
+        "lanczos",
+        0.5
+      ]
+    },
+    {
+      "id": 1,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": 683,
+        "1": 307
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            12,
+            17
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "GGUF\\flux1-dev-Q8_0.gguf"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 682,
+        "1": 475
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            19
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l-FLUX.safetensors",
+        "t5xxl_fp8_e4m3fn-FLUX.safetensors",
+        "flux"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "BasicGuider",
+      "pos": {
+        "0": 1599,
+        "1": 327
+      },
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 18
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            4
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      }
+    },
+    {
+      "id": 18,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": {
+        "0": 1141,
+        "1": 120
+      },
+      "size": {
+        "0": 340.20001220703125,
+        "1": 142
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 17,
+          "dir": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 19,
+          "dir": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "dir": 4
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            20
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "dir": 4
+        }
+      ],
+      "properties": {
+        "Show Strengths": "Single Strength"
+      },
+      "widgets_values": [
+        null,
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "Flux\\reallism_flux_lora.safetensors",
+          "strength": 0.2,
+          "strengthTwo": null
+        },
+        null,
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "RandomNoise",
+      "pos": {
+        "0": 1241,
+        "1": 885
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            5
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        449010861518027,
+        "randomize"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": 1238,
+        "1": 1075
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            6
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 1666,
+        "1": 1209
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            8
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 16,
+      "type": "UpscaleModelLoader",
+      "pos": {
+        "0": 2043,
+        "1": 1047
+      },
+      "size": {
+        "0": 268.5950012207031,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            14
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "RealESRGAN_x4plus.pth"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": 1235,
+        "1": 1246
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1
+      ]
+    },
+    {
+      "id": 14,
+      "type": "SaveImage",
+      "pos": {
+        "0": 2446,
+        "1": 670
+      },
+      "size": {
+        "0": 448.7395935058594,
+        "1": 541.3715209960938
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 16
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "CU_work"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1193,
+        "1": 530
+      },
+      "size": {
+        "0": 465.76373291015625,
+        "1": 116.61527252197266
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            3
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "materpiece, best quality, (A {dog|cat|deer|Rabbit|duck} is standing by a river). "
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 19,
+      "type": "Note",
+      "pos": {
+        "0": 669,
+        "1": 849
+      },
+      "size": [
+        383.63638247423205,
+        284.5454562122318
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Clip 파일명과 VAE 파일명이 약간 다를수 있습니다. \n또한, 저장 경로가 다르다고 판단되기에, 전체적으로 경로를 체크해야 합니다.  Unet 모델및 로라 경로등 \n\n전체적으로 파일명과 저장 경로, 추가하고 싶은 로라, 업스케일 모델, 스탭 수,  크기등을 조절하고, 만들고 싶은 프롬프트로 변경하여 사용하시면 됩니다. "
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      3,
+      4,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      4,
+      5,
+      0,
+      6,
+      1,
+      "GUIDER"
+    ],
+    [
+      5,
+      7,
+      0,
+      6,
+      0,
+      "NOISE"
+    ],
+    [
+      6,
+      8,
+      0,
+      6,
+      2,
+      "SAMPLER"
+    ],
+    [
+      7,
+      11,
+      0,
+      6,
+      3,
+      "SIGMAS"
+    ],
+    [
+      8,
+      12,
+      0,
+      6,
+      4,
+      "LATENT"
+    ],
+    [
+      9,
+      6,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      10,
+      3,
+      0,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      12,
+      1,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      13,
+      13,
+      0,
+      15,
+      1,
+      "IMAGE"
+    ],
+    [
+      14,
+      16,
+      0,
+      15,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      15,
+      15,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      17,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      1,
+      0,
+      18,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      18,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      19,
+      2,
+      0,
+      18,
+      1,
+      "CLIP"
+    ],
+    [
+      20,
+      18,
+      1,
+      4,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.620921323059155,
+      "offset": [
+        -166.81111937886507,
+        -1.8805930978717318
+      ]
+    }
+  },
+  "version": 0.4
+}
