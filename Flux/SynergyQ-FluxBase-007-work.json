@@ -95,7 +95,8 @@
       ],
       "properties": {
         "Node name for S&R": "SamplerCustomAdvanced"
-      }
+      },
+      "widgets_values": []
     },
     {
       "id": 13,
@@ -136,7 +137,8 @@
       ],
       "properties": {
         "Node name for S&R": "VAEDecode"
-      }
+      },
+      "widgets_values": []
     },
     {
       "id": 15,
@@ -177,7 +179,8 @@
       ],
       "properties": {
         "Node name for S&R": "ImageUpscaleWithModel"
-      }
+      },
+      "widgets_values": []
     },
     {
       "id": 17,
@@ -327,7 +330,8 @@
       ],
       "properties": {
         "Node name for S&R": "BasicGuider"
-      }
+      },
+      "widgets_values": []
     },
     {
       "id": 18,
@@ -600,6 +604,29 @@
       ]
     },
     {
+      "id": 19,
+      "type": "Note",
+      "pos": {
+        "0": 669,
+        "1": 849
+      },
+      "size": {
+        "0": 383.6363830566406,
+        "1": 284.54547119140625
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Clip 파일명과 VAE 파일명이 약간 다를수 있습니다. \n또한, 저장 경로가 다르다고 판단되기에, 전체적으로 경로를 체크해야 합니다.  Unet 모델및 로라 경로등 \n\n전체적으로 파일명과 저장 경로, 추가하고 싶은 로라, 업스케일 모델, 스탭 수,  크기등을 조절하고, 만들고 싶은 프롬프트로 변경하여 사용하시면 됩니다. "
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
       "id": 4,
       "type": "CLIPTextEncode",
       "pos": {
@@ -635,33 +662,10 @@
         "Node name for S&R": "CLIPTextEncode"
       },
       "widgets_values": [
-        "materpiece, best quality, (A {dog|cat|deer|Rabbit|duck} is standing by a river). "
+        "masterpiece, best quality, (A {dog|cat|deer|Rabbit|duck} is standing by a river). "
       ],
       "color": "#232",
       "bgcolor": "#353"
-    },
-    {
-      "id": 19,
-      "type": "Note",
-      "pos": {
-        "0": 669,
-        "1": 849
-      },
-      "size": [
-        383.63638247423205,
-        284.5454562122318
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {},
-      "widgets_values": [
-        "Clip 파일명과 VAE 파일명이 약간 다를수 있습니다. \n또한, 저장 경로가 다르다고 판단되기에, 전체적으로 경로를 체크해야 합니다.  Unet 모델및 로라 경로등 \n\n전체적으로 파일명과 저장 경로, 추가하고 싶은 로라, 업스케일 모델, 스탭 수,  크기등을 조절하고, 만들고 싶은 프롬프트로 변경하여 사용하시면 됩니다. "
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
     }
   ],
   "links": [
@@ -806,10 +810,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.620921323059155,
+      "scale": 1.4641000000000006,
       "offset": [
-        -166.81111937886507,
-        -1.8805930978717318
+        -808.6971488033319,
+        -317.1147930771109
       ]
     }
   },
